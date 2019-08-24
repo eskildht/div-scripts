@@ -9,8 +9,15 @@ def spam(to_mail, spoofs):
     s.starttls()
     s.ehlo()
 
-    from_mail = "yurtyurtyurt67@gmail.com"
-    s.login(from_mail, "yurtyurtyurtyurt")
+    f = open("./email_spam_accounts.txt", "r")
+    lines = f.readlines()
+    f.close()
+    
+    account_1_username, account_1_password = lines[0].split(" ")[0], lines[0].split(" ")[1]
+    account_2_username, account_2_password = lines[1].split(" ")[0], lines[1].split(" ")[1]
+    
+    from_mail = account_1_username
+    s.login(from_mail, account_1_password)
 
     switch = True
 
@@ -41,12 +48,12 @@ def spam(to_mail, spoofs):
             s.ehlo()
 
             if switch:
-                from_mail = "yurtyurtyurt68@gmail.com"
-                s.login(from_mail, "yurtyurtyurtyurtyurt")
+                from_mail = account_2_username
+                s.login(from_mail, account_2_password)
                 switch = False
             else:
-                from_mail = "yurtyurtyurt67@gmail.com"
-                s.login(from_mail, "yurtyurtyurtyurt")
+                from_mail = account_1_username
+                s.login(from_mail, account_1_password)
 
     s.quit()
 
