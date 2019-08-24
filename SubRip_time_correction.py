@@ -32,6 +32,7 @@ def get_unique_file(srt_files):
             error_msg += '\n"' + file + '"'
         print(error_msg)
     else:
+        print('File: "' + matching_files[0] + '" selected')
         return matching_files[0]
     return None
 
@@ -51,6 +52,10 @@ def is_valid_correction_amount(c_amount, file_name, download_path):
             return False
     else:
         print('"," must be used as separator')
+        return False
+
+    if len(c_amount) != 6:
+        print("Please use all required decimals")
         return False
 
     if operator == "-":
@@ -143,9 +148,13 @@ def get_new_time(old_time, amount, operation):
 
 def print_startup_info():
     """Prints info about the behaviour of the program"""
-    print("Time correction tool for srt-scripts on macos and linux")
+    print("Time correction tool for srt-scripts on macOS and Linux")
     print("Assumes script is located in download-folder of user ")
 
+def print_ending_info():
+    """Informs user about succesfull operation"""
+    print("New time-corrected file saved to download-folder")
+    print("File-name is <original_file_name>_corrected.srt")
 
 def main():
     "Main-method which is executed when running the script"
@@ -161,6 +170,7 @@ def main():
     while not time_correct_file(file_name, download_path):
         time_correct_file(file_name, download_path)
 
+    print_ending_info()
 
 if __name__ == '__main__':
     main()
