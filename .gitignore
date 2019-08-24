@@ -223,3 +223,6 @@ tags
 [._]*.un~
 
 # End of https://www.gitignore.io/api/vim,emacs,macos,python
+
+# Personal stuff
+email_spam_accounts.txt
